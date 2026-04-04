@@ -1,48 +1,50 @@
 import gradio as gr
 
+from .api import load_model
+from .gradio_app import ui as build_ui
+
+
+def ui_wrapper():
+    """Mount the OmniVoice UI into the parent app."""
+    build_ui()
+
 
 def omnivoice_ui():
     gr.Markdown(
         """
     # Omnivoice
     
-    This is a template extension. Replace this content with your extension's functionality.
+    State-of-the-art text-to-speech model for **600+ languages**, supporting:
     
-    To use it, simply modify this UI and add your custom logic.
+    - **Voice Clone** — Clone any voice from a reference audio
+    - **Voice Design** — Create custom voices with speaker attributes
+    
+    Built with [OmniVoice](https://github.com/k2-fsa/OmniVoice)
+    by Xiaomi Next-gen Kaldi team.
     """
     )
-    
-    # Add your UI components here
-    # Example:
-    # with gr.Row():
-    #     with gr.Column():
-    #         input_text = gr.Textbox(label="Input")
-    #         button = gr.Button("Process")
-    #     with gr.Column():
-    #         output_text = gr.Textbox(label="Output")
-    # 
-    # button.click(
-    #     fn=your_processing_function,
-    #     inputs=[input_text],
-    #     outputs=[output_text],
-    #     api_name="omnivoice",
-    # )
 
 
 def extension__tts_generation_webui():
     omnivoice_ui()
-    
+
+    # Load the model when extension is initialized
+    try:
+        load_model("k2-fsa/OmniVoice")
+    except Exception as e:
+        print(f"Warning: Could not preload OmniVoice model: {e}")
+
     return {
         "package_name": "tts_webui_extension.omnivoice",
         "name": "Omnivoice",
         "requirements": "git+https://github.com/rsxdalv/tts_webui_extension.omnivoice@main",
-        "description": "A template extension for TTS Generation WebUI",
+        "description": "State-of-the-art massive multilingual zero-shot text-to-speech model supporting 600+ languages with voice cloning and voice design.",
         "extension_type": "interface",
         "extension_class": "text-to-speech",
-        "author": "Your Name",
+        "author": "Xiaomi Next-gen Kaldi team",
         "extension_author": "rsxdalv",
         "license": "MIT",
-        "website": "https://github.com/rsxdalv/tts_webui_extension.omnivoice",
+        "website": "https://github.com/k2-fsa/OmniVoice",
         "extension_website": "https://github.com/rsxdalv/tts_webui_extension.omnivoice",
         "extension_platform_version": "0.0.1",
     }
@@ -56,5 +58,5 @@ if __name__ == "__main__":
             omnivoice_ui()
 
     demo.launch(
-        server_port=7772,  # Change this port if needed
+        server_port=7772,
     )

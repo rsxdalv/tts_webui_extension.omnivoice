@@ -19,6 +19,7 @@ classifiers = [
 dependencies = [
     # Add your dependencies here
     # "torch",
+    "omnivoice@git+https://github.com/rsxdalv/tts-webui.OmniVoice@pkg",
 ]
 urls = { "Homepage" = "https://github.com/rsxdalv/tts_webui_extension.omnivoice" }
 
