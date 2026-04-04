@@ -16,11 +16,11 @@
 # limitations under the License.
 """Omnivoice extension API — exposed to tts_webui."""
 
-import logging
 from __future__ import annotations
 
 from typing import TYPE_CHECKING, Any, Dict, Optional, Tuple, Union
 
+import logging
 import gradio as gr
 import numpy as np
 import torch

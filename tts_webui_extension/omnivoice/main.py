@@ -1,38 +1,14 @@
 import gradio as gr
 
-from .api import load_model
 from .gradio_app import ui as build_ui
 
 
-def ui_wrapper():
-    """Mount the OmniVoice UI into the parent app."""
-    build_ui()
-
-
 def omnivoice_ui():
-    gr.Markdown(
-        """
-    # Omnivoice
-    
-    State-of-the-art text-to-speech model for **600+ languages**, supporting:
-    
-    - **Voice Clone** — Clone any voice from a reference audio
-    - **Voice Design** — Create custom voices with speaker attributes
-    
-    Built with [OmniVoice](https://github.com/k2-fsa/OmniVoice)
-    by Xiaomi Next-gen Kaldi team.
-    """
-    )
+    build_ui()
 
 
 def extension__tts_generation_webui():
     omnivoice_ui()
-
-    # Load the model when extension is initialized
-    try:
-        load_model("k2-fsa/OmniVoice")
-    except Exception as e:
-        print(f"Warning: Could not preload OmniVoice model: {e}")
 
     return {
         "package_name": "tts_webui_extension.omnivoice",
