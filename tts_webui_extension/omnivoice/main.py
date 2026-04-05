@@ -1,14 +1,16 @@
 import gradio as gr
 
-from .gradio_app import ui as build_ui
-
 
 def omnivoice_ui():
+    from .gradio_app import ui as build_ui
+
     build_ui()
 
 
 def extension__tts_generation_webui():
     omnivoice_ui()
+    from .openai_api_adapter import register
+    register()
 
     return {
         "package_name": "tts_webui_extension.omnivoice",
