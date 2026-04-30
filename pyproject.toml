@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "tts_webui_extension.omnivoice"
-version = "1.1.0"
+version = "1.2.0"
 description = "A template extension for TTS Generation WebUI"
 readme = "README.md"
 authors = [
@@ -20,6 +20,7 @@ dependencies = [
     # Add your dependencies here
     # "torch",
     "omnivoice@git+https://github.com/rsxdalv/tts-webui.OmniVoice@pkg",
+    "tts_webui_extension.openai_tts_api>=1.4.0",
 ]
 urls = { "Homepage" = "https://github.com/rsxdalv/tts_webui_extension.omnivoice" }
 
