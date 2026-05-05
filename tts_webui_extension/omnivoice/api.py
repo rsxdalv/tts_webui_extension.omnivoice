@@ -18,9 +18,9 @@
 
 from __future__ import annotations
 
+import logging
 from typing import TYPE_CHECKING, Any, Dict, Optional, Tuple, Union
 
-import logging
 import gradio as gr
 import numpy as np
 import torch
@@ -29,9 +29,9 @@ if TYPE_CHECKING:
     from omnivoice import OmniVoice, OmniVoiceGenerationConfig
 
 from tts_webui.utils.manage_model_state import (
+    get_current_model,
     manage_model_state,
     rename_model,
-    get_current_model,
 )
 
 logger = logging.getLogger(__name__)
@@ -228,7 +228,7 @@ def _generate_with_progress(
     if progress:
         progress(1.0, desc="Done.")
 
-    waveform = audio[0].squeeze(0).numpy()  # (T,)
+    waveform = audio[0]  # (T,)
     waveform = (waveform * 32767).astype(np.int16)
 
     return {
